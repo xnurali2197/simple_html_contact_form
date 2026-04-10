@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Simple contact form with proper HTML structure">
+    <meta name="author" content="Your Name">
+    <title>Contact Form - Simple HTML</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .container {
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        .form-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        label .required {
+            color: #e74c3c;
+            margin-left: 0.3rem;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            padding: 0.75rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background-color: #f9f9f9;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+            max-height: 300px;
+        }
+
+        .form-hint {
+            font-size: 0.85rem;
+            color: #999;
+            margin-top: 0.25rem;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.875rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .reset-btn {
+            background: #95a5a6;
+            margin-top: 0;
+        }
+
+        .reset-btn:hover {
+            background: #7f8c8d;
+            box-shadow: 0 5px 15px rgba(127, 140, 141, 0.4);
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid #28a745;
+            display: none;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .button-group {
+                grid-template-columns: 1fr;
+            }
+
+            button, .reset-btn {
+                width: 100%;
+            }
+        }
+
+        /* Accessibility improvements */
+        input:invalid {
+            border-color: #e74c3c;
+        }
+
+        input:valid {
+            border-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📧 Contact Us</h1>
+        <p class="form-subtitle">We'd love to hear from you. Send us a message!</p>
+
+        <div class="success-message" id="successMessage">
+            ✅ Thank you! Your message has been sent successfully.
+        </div>
+
+        <form id="contactForm" novalidate>
+            <!-- Name Field -->
+            <div class="form-group">
+                <label for="name">
+                    Full Name
+                    <span class="required">*</span>
+                </label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your full name"
+                    required
+                    minlength="3"
+                    maxlength="100"
+                >
+                <p class="form-hint">Please enter at least 3 characters</p>
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group">
+                <label for="email">
+                    Email Address
+                    <span class="required">*</span>
+                </label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="your.email@example.com"
+                    required
+                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                >
+                <p class="form-hint">We'll never share your email address</p>
+            </div>
+
+            <!-- Message Field -->
+            <div class="form-group">
+                <label for="message">
+                    Message
+                    <span class="required">*</span>
+                </label>
+                <textarea
+                    id="message"
+                    name="message"
+                    placeholder="Write your message here..."
+                    required
+                    minlength="10"
+                    maxlength="1000"
+                ></textarea>
+                <p class="form-hint">Minimum 10 characters, maximum 1000</p>
+            </div>
+
+            <!-- Buttons -->
+            <div class="button-group">
+                <button type="submit" id="submitBtn">
+                    Send Message
+                </button>
+                <button type="reset" class="reset-btn" id="resetBtn">
+                    Clear Form
+                </button>
+            </div>
+        </form>
+
+        <p style="text-align: center; margin-top: 2rem; color: #999; font-size: 0.85rem;">
+            * Required fields
+        </p>
+    </div>
+
+    <script>
+        // Form handling
+        const form = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+        const submitBtn = document.getElementById('submitBtn');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const messageInput = document.getElementById('message');
+
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Validate form
+            if (!form.checkValidity()) {
+                alert('Please fill in all required fields correctly.');
+                return;
+            }
+
+            // Show success message
+            successMessage.classList.add('show');
+
+            // Log form data (in real app, this would be sent to server)
+            console.log({
+                name: nameInput.value,
+                email: emailInput.value,
+                message: messageInput.value,
+                timestamp: new Date().toISOString()
+            });
+
+            // Clear form after 2 seconds
+            setTimeout(() => {
+                form.reset();
+                successMessage.classList.remove('show');
+            }, 3000);
+        });
+
+        // Real-time validation feedback
+        nameInput.addEventListener('blur', function() {
+            if (this.value.length < 3 && this.value.length > 0) {
+                this.style.borderColor = '#e74c3c';
+            } else if (this.value.length >= 3) {
+                this.style.borderColor = '#27ae60';
+            }
+        });
+
+        emailInput.addEventListener('blur', function() {
+            const emailPattern = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
+            if (this.value && !emailPattern.test(this.value)) {
+                this.style.borderColor = '#e74c3c';
+            } else if (this.value) {
+                this.style.borderColor = '#27ae60';
+            }
+        });
+
+        messageInput.addEventListener('blur', function() {
+            if (this.value.length < 10 && this.value.length > 0) {
+                this.style.borderColor = '#e74c3c';
+            } else if (this.value.length >= 10) {
+                this.style.borderColor = '#27ae60';
+            }
+        });
+
+        // Remove error styling on focus
+        [nameInput, emailInput, messageInput].forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.borderColor = '#667eea';
+            });
+        });
+    </script>
+</body>
+</html>
